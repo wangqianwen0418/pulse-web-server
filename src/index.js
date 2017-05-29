@@ -5,7 +5,7 @@ var app = express();
 
 var mongoose = require("mongoose");
 mongoose.Promise = require("bluebird");
-mongoose.connect('mongodb://localhost:27017/test');
+mongoose.connect('mongodb://localhost:27017/pulse');
 // For POST-Support
 var bodyParser = require('body-parser');
 var multer = require('multer');
@@ -52,12 +52,10 @@ app.post('/api/sayhello', upload.array(), function (request, response) {
 //find 
 app.get('/:collection/:name', function (request, response) {
     var reply = []
-    get_collection(request.params.collection).findOne({name: request.params.name}, function(err, self){
-        if (err) console.info(err)
-        // response.json(self)
-        // console.info(self)
-    })
-    get_collection(request.params.collection).find({name: request.params.name}).toArray((err, docu)=>{
+    // get_collection(request.params.collection).findOne({name: request.params.name}, function(err, self){
+    //     if (err) console.info(err)
+    // })
+    get_collection(request.params.collection).find({category: request.params.name}).toArray((err, docu)=>{
         response.json(docu)
     })
 
