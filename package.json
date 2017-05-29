@@ -1,8 +1,7 @@
 {
-  "name": "VSCodeExpressjsTypeScriptSample",
+  "name": "pulse-web-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"

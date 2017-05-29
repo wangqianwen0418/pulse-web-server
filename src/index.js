@@ -51,14 +51,19 @@ app.post('/api/sayhello', upload.array(), function (request, response) {
 
 //find 
 app.get('/:collection/:name', function (request, response) {
-    var reply = []
-    // get_collection(request.params.collection).findOne({name: request.params.name}, function(err, self){
-    //     if (err) console.info(err)
-    // })
     get_collection(request.params.collection).find({category: request.params.name}).toArray((err, docu)=>{
         response.json(docu)
     })
 
+});
+
+// http:localhost:3000/api?collection=calendar&name=Exhibition
+app.get('/api/', function (request, response) {
+    get_collection(request.query.collection)
+    .find({category: request.query.name})
+    .toArray((err, docu)=>{
+        response.json(docu)
+    })
 });
 
 // http://localhost:3000/api/sayhello/John
@@ -76,21 +81,7 @@ app.get('/api/sayhello/:name', function (request, response) {
     }
 });
 
-// http:localhost:3000/api/sayhello?name=NodeJS
-app.get('/api/sayhello/', function (request, response) {
-    var name = request.query.name;
-    var result = {
-        message: name
-    };
-    if (!isNaN(name)) {
-        response
-            .status(400)
-            .send('No string as name');
-    }
-    else {
-        response.send(request.query.name);
-    }
-});
+
 
 app.listen(3000);
 //# sourceMappingURL=index.js.map
